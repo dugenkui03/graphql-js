@@ -52,7 +52,7 @@ export function validateSchema(
   if (schema.__validationErrors) {
     return schema.__validationErrors;
   }
-
+    //tag
   // Validate the schema, producing a list of errors.
   const context = new SchemaValidationContext(schema);
   validateRootTypes(context);

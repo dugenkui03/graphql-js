@@ -80,7 +80,7 @@ describe('Validate: Variables are in allowed positions', () => {
 
   it('[String] => [String]', () => {
     expectValid(`
-      query Query($stringListVar: [String])
+      query Query($strinxgListVar: [String])
       {
         complicatedArgs {
           stringListArgField(stringListArg: $stringListVar)

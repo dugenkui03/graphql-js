@@ -63,6 +63,7 @@ import {
   KnownArgumentNamesOnDirectivesRule,
 } from './rules/KnownArgumentNamesRule';
 
+//唯一参数验证规则
 // Spec Section: "Argument Uniqueness"
 import { UniqueArgumentNamesRule } from './rules/UniqueArgumentNamesRule';
 

@@ -68,6 +68,7 @@ export function buildASTSchema(
   );
 
   if (options?.assumeValid !== true && options?.assumeValidSDL !== true) {
+    //调用document的合法性
     assertValidSDL(documentAST);
   }
 

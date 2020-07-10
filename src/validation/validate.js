@@ -104,6 +104,7 @@ export function validateSDL(
 }
 
 /**
+ * 工具函数，用来验证document对象是合法的
  * Utility function which asserts a SDL document is valid by throwing an error
  * if it is invalid.
  *

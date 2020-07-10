@@ -59,6 +59,7 @@ export { ScalarLeafsRule } from './rules/ScalarLeafsRule';
 // Spec Section: "Subscriptions with Single Root Field"
 export { SingleFieldSubscriptionsRule } from './rules/SingleFieldSubscriptionsRule';
 
+//唯一参数验证规则
 // Spec Section: "Argument Uniqueness"
 export { UniqueArgumentNamesRule } from './rules/UniqueArgumentNamesRule';
 

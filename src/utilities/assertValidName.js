@@ -7,7 +7,7 @@ import { GraphQLError } from '../error/GraphQLError';
 const NAME_RX = /^[_a-zA-Z][_a-zA-Z0-9]*$/;
 
 /**
- * Upholds the spec rules about naming.
+ * Upholds(准守) the spec rules about naming.
  */
 export function assertValidName(name: string): string {
   const error = isValidNameError(name);
