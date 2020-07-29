@@ -155,6 +155,7 @@ function getOperationTypeNode(
 }
 
 
+//todo: The argument must have a unique name within that field; no two arguments may share the same name.
 function validateDirectives(context: SchemaValidationContext): void {
   for (const directive of context.schema.getDirectives()) {
     // Ensure all directives are in fact GraphQL directives.
@@ -171,7 +172,8 @@ function validateDirectives(context: SchemaValidationContext): void {
 
     // TODO: Ensure proper locations.
 
-
+    //Object.create(null)创建的空对象
+    let knownArgNames = Object.create(null);
     // Ensure the arguments are valid.
     for (const arg of directive.args) {
       // Ensure they are named correctly.
@@ -184,6 +186,17 @@ function validateDirectives(context: SchemaValidationContext): void {
             `but got: ${inspect(arg.type)}.`,
           arg.astNode,
         );
+      }
+      const argName = arg.name;
+      if (knownArgNames[argName]) {
+        context.reportError(
+          new GraphQLError(
+            `There can be only one argument named "${argName}".`,
+            [knownArgNames[argName], node.name],
+          ),
+        );
+      } else {
+        knownArgNames[argName] = node.name;
       }
     }
   }
@@ -275,6 +288,9 @@ function validateFields(
       );
     }
 
+    // todo
+    let knownArgNames = Object.create(null);
+
     // Ensure the arguments are valid
     for (const arg of field.args) {
       const argName = arg.name;
@@ -289,6 +305,16 @@ function validateFields(
             `Type but got: ${inspect(arg.type)}.`,
           arg.astNode?.type,
         );
+      }
+      if (knownArgNames[argName]) {
+        context.reportError(
+          new GraphQLError(
+            `There can be only one argument named "${argName}".`,
+            [knownArgNames[argName], node.name],
+          ),
+        );
+      } else {
+        knownArgNames[argName] = node.name;
       }
     }
   }

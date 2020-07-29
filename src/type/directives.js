@@ -46,6 +46,7 @@ export function assertDirective(directive: mixed): GraphQLDirective {
  */
 export class GraphQLDirective {
   name: string;
+  //todo 问号啥意思？
   description: ?string;
   locations: Array<DirectiveLocationEnum>;
   args: Array<GraphQLArgument>;

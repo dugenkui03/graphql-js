@@ -13,6 +13,11 @@ export function UniqueArgumentNamesRule(
   context: ASTValidationContext,
 ): ASTVisitor {
   let knownArgNames = Object.create(null);
+  /**
+   * 返回一个对象：https://www.jianshu.com/p/d39b3a6207a2
+   *
+   * 构造函数 return {回调方法A,回调方法B}
+   */
   return {
     Field() {
       knownArgNames = Object.create(null);
