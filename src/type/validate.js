@@ -156,6 +156,7 @@ function getOperationTypeNode(
   return undefined;
 }
 
+
 function validateDirectives(context: SchemaValidationContext): void {
   for (const directive of context.schema.getDirectives()) {
     // Ensure all directives are in fact GraphQL directives.
@@ -171,6 +172,7 @@ function validateDirectives(context: SchemaValidationContext): void {
     validateName(context, directive);
 
     // TODO: Ensure proper locations.
+
 
     // Ensure the arguments are valid.
     for (const arg of directive.args) {

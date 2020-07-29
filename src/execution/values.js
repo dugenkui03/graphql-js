@@ -41,10 +41,7 @@ type CoercedVariableValues =
  *
  * @internal
  */
-export function getVariableValues(
-  schema: GraphQLSchema,
-  varDefNodes: $ReadOnlyArray<VariableDefinitionNode>,
-  inputs: { +[variable: string]: mixed, ... },
+export function getVariableValues(schema: GraphQLSchema, varDefNodes: $ReadOnlyArray<VariableDefinitionNode>, inputs: { +[variable: string]: mixed, ... },
   options?: {| maxErrors?: number |},
 ): CoercedVariableValues {
   const errors = [];
