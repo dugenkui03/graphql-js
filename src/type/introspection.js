@@ -1,5 +1,3 @@
-// @flow strict
-
 import objectValues from '../polyfills/objectValues';
 
 import inspect from '../jsutils/inspect';
@@ -251,13 +249,11 @@ export const __Type = new GraphQLObjectType({
         },
         resolve(type, { includeDeprecated }) {
           if (isObjectType(type) || isInterfaceType(type)) {
-            let fields = objectValues(type.getFields());
-            if (!includeDeprecated) {
-              fields = fields.filter((field) => !field.isDeprecated);
-            }
-            return fields;
+            const fields = objectValues(type.getFields());
+            return includeDeprecated
+              ? fields
+              : fields.filter((field) => field.deprecationReason == null);
           }
-          return null;
         },
       },
       interfaces: {
@@ -283,11 +279,10 @@ export const __Type = new GraphQLObjectType({
         },
         resolve(type, { includeDeprecated }) {
           if (isEnumType(type)) {
-            let values = type.getValues();
-            if (!includeDeprecated) {
-              values = values.filter((value) => !value.isDeprecated);
-            }
-            return values;
+            const values = type.getValues();
+            return includeDeprecated
+              ? values
+              : values.filter((field) => field.deprecationReason == null);
           }
         },
       },
@@ -331,7 +326,7 @@ export const __Field = new GraphQLObjectType({
       },
       isDeprecated: {
         type: GraphQLNonNull(GraphQLBoolean),
-        resolve: (field) => field.isDeprecated,
+        resolve: (field) => field.deprecationReason != null,
       },
       deprecationReason: {
         type: GraphQLString,
@@ -387,7 +382,7 @@ export const __EnumValue = new GraphQLObjectType({
       },
       isDeprecated: {
         type: GraphQLNonNull(GraphQLBoolean),
-        resolve: (enumValue) => enumValue.isDeprecated,
+        resolve: (enumValue) => enumValue.deprecationReason != null,
       },
       deprecationReason: {
         type: GraphQLString,
